@@ -1,5 +1,5 @@
 <template>
-    <div>我是22222</div>
+    <div></div>
 </template>
 
 <script>

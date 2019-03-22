@@ -13,7 +13,6 @@
                             <i class="icon-arrow_lift"></i>
                         </div>
                     </div>
-
                     <div class="content">
                         <h1 class="title">{{food.name}}</h1>
                         <div class="detail">
@@ -57,7 +56,7 @@
                           @toggle="onToggle"
                         ></rating-select>
                         <div class="rating-wrapper">
-                          <ul v-show="ratings && ratings.length">
+                          <ul v-show="computedRatings && computedRatings.length">
                             <li
                               v-for="(rating,index) in computedRatings"
                               class="rating-item border-bottom-1px"
@@ -81,7 +80,7 @@
 
                             </li>
                           </ul>
-                          <div class="no-rating" v-show="!ratings || !ratings.length">
+                          <div class="no-rating" v-show="!computedRatings || !computedRatings.length">
                             暂无评价
                           </div>
                         </div>
