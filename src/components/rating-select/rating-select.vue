@@ -1,7 +1,8 @@
 <template>
+
   <div class="rating-select">
     <div class="rating-type border-bottom-1px">
-
+        <!-- 公共组件评价 -->
       <span @click="select(2)" class="block positive" :class="{'active':selectType===2}">{{desc.all}}<span
         class="count">{{ratings.length}}</span></span>
 
@@ -48,7 +49,7 @@ export default {
                 return {
                     all:'全部',
                     positive:'滿意',
-                    negetive:'不滿意'
+                    negative:'不滿意'
                 }
             }
         }

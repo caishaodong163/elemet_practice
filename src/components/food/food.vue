@@ -4,7 +4,7 @@
         @after-leave="afterLeave"
     >
         <div class="food" v-show="visible">
-            <cube-scroll ref="scroll">
+            <cube-scroll :data="computedRatings" ref="scroll">
                 <div class="food-content">
 
                     <div class="image-header">
@@ -97,16 +97,17 @@
 import popupMixins from "common/mixins/popup";
 import Split from "components/split/split";
 import CartControl from "components/cart-control/cart-control";
-import moment from 'moment';
- import RatingSelect from 'components/rating-select/rating-select'
+import moment from "moment";
+import RatingSelect from "components/rating-select/rating-select";
+
+import ratingMixin from "common/mixins/rating";
 
 const EVENT_SHOW = "show";
 const EVENT_LEAVE = "leave";
 const EVENT_ADD = "add";
-const All = 2;
 
 export default {
-  mixins: [popupMixins],
+  mixins: [popupMixins, ratingMixin],
   name: "food",
   props: {
     food: {
@@ -115,30 +116,16 @@ export default {
   },
   data() {
     return {
-      onlyContent:true,
-      selectType:All,
-      desc:{
-        all:'全部',
-        positive:'推荐',
-        negative:'吐槽'
+      desc: {
+        all: "全部",
+        positive: "推荐",
+        negative: "吐槽"
       }
-    }
+    };
   },
   computed: {
     ratings() {
       return this.food.ratings;
-    },
-    computedRatings() {
-      let ret = [];
-      this.ratings.forEach(x => {
-          if(this.onlyContent && !x.text) {
-            return 
-          }
-          if(this.selectType === All || this.selectType === x.ratetype){
-            ret.push(x) 
-          }
-      });
-      return ret;
     }
   },
   created() {
@@ -160,13 +147,7 @@ export default {
       this.$emit(EVENT_ADD, target);
     },
     format(time) {
-      return moment(time).format('YYYY-MM-DD hh:mm')
-    },
-    onSelect(type) {
-      this.selectType = type
-    },
-    onToggle(){ //取反
-      this.onlyContent = !this.onlyContent
+      return moment(time).format("YYYY-MM-DD hh:mm");
     }
   },
   components: {

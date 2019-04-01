@@ -139,15 +139,15 @@ export default {
     }
   },
   methods: {
-    fetch() {
-      // 获取过一次就不会重新获取了   goods
+    fetch() {// 获取过一次就不会重新获取了   goods
       if(!this.fetched) {
         this.fetched = true;
-        getGoods().then(goods => {
+        getGoods({
+          id:this.seller.id
+        }).then(goods => {
           this.goods = goods;
         });
       }
-
     },
     onAdd(el) {
       this.$refs.shopCart.drop(el);
